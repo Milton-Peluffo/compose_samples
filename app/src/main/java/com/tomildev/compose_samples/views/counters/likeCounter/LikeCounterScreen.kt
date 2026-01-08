@@ -25,18 +25,19 @@ import com.tomildev.compose_samples.R
 fun BasicCounterScreen(basicCounterScreenViewModel: BasicCounterScreenViewModel = viewModel()) {
 
     val count by basicCounterScreenViewModel.count.collectAsStateWithLifecycle()
-    val counter: String = count.toString()
 
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
-                modifier = Modifier.size(100.dp).clickable(onClick = { basicCounterScreenViewModel.increment() }),
-                painter = painterResource(R.drawable.baseline_favorite_24),
+                modifier = Modifier
+                    .size(100.dp)
+                    .clickable(onClick = { basicCounterScreenViewModel.increment() }),
+                painter = painterResource(R.drawable.ic_heart_filled),
                 contentDescription = "",
                 tint = Color.Red
             )
             Spacer(Modifier.padding(horizontal = 5.dp))
-            Text(counter, fontSize = 80.sp)
+            Text(count.count.toString(), fontSize = 80.sp)
         }
     }
 }
