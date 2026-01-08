@@ -1,6 +1,9 @@
 package com.tomildev.compose_samples.views.counters.likeCounter
 
+import android.util.Size
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -24,20 +27,27 @@ import com.tomildev.compose_samples.R
 @Composable
 fun BasicCounterScreen(basicCounterScreenViewModel: BasicCounterScreenViewModel = viewModel()) {
 
-    val count by basicCounterScreenViewModel.count.collectAsStateWithLifecycle()
+    val state by basicCounterScreenViewModel.state.collectAsStateWithLifecycle()
+
+    val icon = if (state.isLiked) R.drawable.ic_heart_filled else R.drawable.ic_heart_outlined
 
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
                 modifier = Modifier
                     .size(100.dp)
-                    .clickable(onClick = { basicCounterScreenViewModel.increment() }),
-                painter = painterResource(R.drawable.ic_heart_filled),
+                    .clickable(
+                        onClick = { basicCounterScreenViewModel.doLike() },
+                        interactionSource = MutableInteractionSource(),
+                        indication = null
+                    ),
+                painter = painterResource(icon),
                 contentDescription = "",
                 tint = Color.Red
             )
-            Spacer(Modifier.padding(horizontal = 5.dp))
-            Text(count.count.toString(), fontSize = 80.sp)
+            Box(modifier = Modifier.size(90.dp), contentAlignment = Alignment.Center) {
+                Text(if (state.isLiked) state.count.toString() else "", fontSize = 80.sp)
+            }
         }
     }
 }

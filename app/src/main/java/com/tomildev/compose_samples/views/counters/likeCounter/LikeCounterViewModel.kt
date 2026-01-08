@@ -9,16 +9,27 @@ import kotlinx.coroutines.flow.update
 class BasicCounterScreenViewModel : ViewModel() {
 
     private val _state = MutableStateFlow(LikeData())
-    val count: StateFlow<LikeData> = _state.asStateFlow()
+    val state: StateFlow<LikeData> = _state.asStateFlow()
 
-    fun increment(){
-        _state.update {
-            it.copy(count = _state.value.count + 1)
+    fun doLike() {
+
+        if (_state.value.count == 0) {
+            _state.update {
+                it.copy(count = countIncrement(_state.value.count))
+            }
+        } else {
+            _state.update {
+                it.copy(count = countDecrement(_state.value.count))
+            }
         }
-        //countIncrement(_state.value.count)
+        _state.update {
+            it.copy(isLiked = iconChange(_state.value.isLiked))
+        }
     }
 
-    //private fun countIncrement(count: Int): Int = count + 1
+    private fun countIncrement(count: Int): Int = count + 1
+    private fun countDecrement(count: Int): Int = count - 1
+    private fun iconChange(isLiked: Boolean): Boolean = !isLiked
 
 }
 
