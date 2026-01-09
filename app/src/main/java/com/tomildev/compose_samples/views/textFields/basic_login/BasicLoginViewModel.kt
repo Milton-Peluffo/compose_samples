@@ -9,32 +9,36 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import java.util.regex.Matcher
 
-class BasicLoginViewModel : ViewModel(){
+class BasicLoginViewModel : ViewModel() {
 
     private val _uiState = MutableStateFlow(LoginModel())
     val uiState: StateFlow<LoginModel> = _uiState.asStateFlow()
 
-    fun doLogin(){
+    fun onEmailChanged(email: String) {
 
         _uiState.update { currentState ->
             currentState.copy(
-                email = _uiState.value.email
-            )
-        }
-        _uiState.update { currentState ->
-            currentState.copy(
-                password = _uiState.value.password
+                email = email
             )
         }
     }
 
-    private fun validEmail(email: String): Boolean = Patterns.EMAIL_ADDRESS.matcher(email).matches()
-    private fun validPassword(password: String): Boolean = password.length >= 8
+    fun onPasswordChanged(password: String) {
 
+        _uiState.update { currentState ->
+            currentState.copy(
+                password = password
+            )
+        }
+    }
+
+//    private fun validEmail(email: String): Boolean = Patterns.EMAIL_ADDRESS.matcher(email).matches()
+//    private fun validPassword(password: String): Boolean = password.length >= 8
+
+
+    data class LoginModel(
+        val email: String = "",
+        val password: String = "",
+        val isLogged: Boolean = false
+    )
 }
-
-data class LoginModel(
-    val email: String = "",
-    val password: String = "",
-    val isLogged: Boolean = false
-)
