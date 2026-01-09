@@ -32,8 +32,16 @@ class BasicLoginViewModel : ViewModel() {
         }
     }
 
-//    private fun validEmail(email: String): Boolean = Patterns.EMAIL_ADDRESS.matcher(email).matches()
-//    private fun validPassword(password: String): Boolean = password.length >= 8
+    fun doLogin(){
+
+//        if (validEmail){
+//
+//        }
+
+    }
+
+    private fun validEmail(email: String): Boolean = Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    private fun validPassword(password: String): Boolean = password.length >= 8
 
 
     data class LoginModel(

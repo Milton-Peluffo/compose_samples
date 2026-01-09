@@ -30,7 +30,9 @@ fun TextFieldPrimary(
         shape = RoundedCornerShape(30),
         colors = OutlinedTextFieldDefaults.colors(
             focusedTextColor = Color.White,
-            unfocusedTextColor = Color.White
+            unfocusedTextColor = Color.White,
+            focusedBorderColor = Color.White,
+            unfocusedBorderColor = Color.Gray
         )
     )
 }

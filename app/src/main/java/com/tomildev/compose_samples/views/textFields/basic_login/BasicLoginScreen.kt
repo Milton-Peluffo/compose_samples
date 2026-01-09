@@ -69,5 +69,13 @@ fun BasicLoginScreen(modifier: Modifier = Modifier, basicLoginViewModel: BasicLo
         ) {
             Text("Login", fontSize = 17.sp, fontWeight = FontWeight.Bold)
         }
+        Spacer(Modifier.height(20.dp))
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            text = "I forgot my password",
+            fontSize = 15.sp,
+            fontWeight = FontWeight.ExtraBold,
+            textAlign = TextAlign.Center
+        )
     }
 }
